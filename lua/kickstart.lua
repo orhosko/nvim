@@ -484,7 +484,6 @@ local servers = {
   tailwindcss = {},
   prismals = {},
   pyright = {},
-  black = {},
   -- gopls = {},
   -- rust_analyzer = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
