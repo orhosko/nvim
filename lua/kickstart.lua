@@ -1,4 +1,4 @@
---2 aralık 2023 kickstartla günceliz
+--8 aralık 2023 kickstartla günceliz
 --
 -- notlarım: 3) leader gp go prev hun/ l gn next hunk/ ph preview hunk, 6) mason lspleri indiriyo/ lspconfig azır cconfigler/ ason-lspconfig 2si arası köprü ve lspconfig isiölerini kullanıyor, 7) gc for comment, 8) treesitter forser dor editting highlighting and code navigation, 9) custom pluginse ekleyebilirsin indirilicek pluginleri, 10) readme ye bak
 -- 11) <leader>? find recently opened/ <leader><space> existing buffer/ <leader>/ current buffer, 12) <leader>s * search bişi 13)275-335, 13)363-388, 14) <C-n> <C-p> öneride ileri geri, 15) leader rn rename, gd  go definition - gr go refenrance - gI implementation - K hover documentation
@@ -110,6 +110,7 @@ require('lazy').setup({
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
@@ -117,7 +118,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -193,14 +194,21 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
+  -- Themes
+  -- {
+  --   -- Theme inspired by Atom
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'onedark'
+  --   end,
+  -- },
+  -- {
+  --   "olimorris/onedarkpro.nvim",
+  --   priority = 1000 -- Ensure it loads first
+  -- },
+  { "catppuccin/nvim",      name = "catppuccin", priority = 1000 },
+  -- Themes
 
   {
     -- Set lualine as statusline
@@ -209,7 +217,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'catppuccin',
         component_separators = '|',
         section_separators = '',
       },
@@ -272,6 +280,9 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'plugins' },
 }, {})
+
+-- vim.cmd("colorscheme onelight")
+vim.cmd.colorscheme "catppuccin-latte"
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -574,6 +585,7 @@ local servers = {
   tailwindcss = {},
   prismals = {},
   pyright = {},
+  htmx = { filetypes = { 'html', 'htmldjango' } },
   -- gopls = {},
   -- rust_analyzer = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
@@ -661,6 +673,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'path' },
   },
 }
 
