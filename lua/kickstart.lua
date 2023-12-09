@@ -1,3 +1,8 @@
+--2 aralık 2023 kickstartla günceliz
+--
+-- notlarım: 3) leader gp go prev hun/ l gn next hunk/ ph preview hunk, 6) mason lspleri indiriyo/ lspconfig azır cconfigler/ ason-lspconfig 2si arası köprü ve lspconfig isiölerini kullanıyor, 7) gc for comment, 8) treesitter forser dor editting highlighting and code navigation, 9) custom pluginse ekleyebilirsin indirilicek pluginleri, 10) readme ye bak
+-- 11) <leader>? find recently opened/ <leader><space> existing buffer/ <leader>/ current buffer, 12) <leader>s * search bişi 13)275-335, 13)363-388, 14) <C-n> <C-p> öneride ileri geri, 15) leader rn rename, gd  go definition - gr go refenrance - gI implementation - K hover documentation
+
 --[[
 
 =====================================================================
@@ -112,7 +117,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -256,8 +261,8 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  -- require 'plugins.autoformat',
+  -- require 'plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -265,7 +270,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -422,7 +427,8 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'css', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
+      'svelte', 'prisma', 'bash', 'json' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -562,11 +568,14 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
+  clangd = {},
+  tsserver = {},
+  svelte = {},
+  tailwindcss = {},
+  prismals = {},
+  pyright = {},
   -- gopls = {},
-  -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -574,7 +583,7 @@ local servers = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      -- diagnostics = { disable = { 'missing-fields' } },
+      diagnostics = { disable = { 'missing-fields' } },
     },
   },
 }
