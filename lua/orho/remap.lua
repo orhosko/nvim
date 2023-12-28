@@ -15,3 +15,6 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "<leader>o", ":bnext<CR>", { desc = "buffer next" })
 vim.keymap.set("n", "<leader>ı", ":bprev<CR>", { desc = "buffer prev" })
 vim.keymap.set("n", "<leader>dd", ":bdelete<CR>", { desc = "buffer delete" })
+
+vim.keymap.set({ "i", "v" }, "jk", "<Esc>", { desc = "quick escape" })
+vim.keymap.set({ "i", "v" }, "kj", "<Esc>", { desc = "quick escape" })

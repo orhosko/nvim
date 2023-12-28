@@ -85,5 +85,33 @@ return {
     require('dap-go').setup()
 
     -- my configs
+    dap.adapters.cppdbg = {
+      id = 'cppdbg',
+      type = 'executable',
+      command = '/home/berkay/.local/share/nvim/mason/bin/OpenDebugAD7',
+    }
+    dap.configurations.cpp = {
+      {
+        name = "Launch file",
+        type = "cppdbg",
+        request = "launch",
+        program = function()
+          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        args = function()
+          local args_string = vim.fn.input("Arguments: ")
+          return vim.split(args_string, " ")
+        end,
+        stopAtEntry = true,
+        setupCommands = {
+          {
+            text = '-enable-pretty-printing',
+            description = 'enable pretty printing',
+            ignoreFailures = false
+          },
+        },
+      },
+    }
   end,
 }
